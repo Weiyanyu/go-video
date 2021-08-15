@@ -3,6 +3,9 @@ package rpc
 import (
 	"context"
 	"go-video/src/common/rpcinterface/userrpcinterface"
+	"go-video/src/common/universalresp"
+	"go-video/src/common/utils"
+	"go-video/src/services/user/db/repository"
 )
 
 //UserHandler for rpc interface
@@ -14,7 +17,24 @@ func (*UserHandler) UserRegister(ctx context.Context,
 	req *userrpcinterface.RegisterReq,
 	resp *userrpcinterface.ReigisterResp) error {
 
-	//TODO:imp
+	if repository.ExistUserByUsername(req.Username) {
+		resp.Code = universalresp.RespCodeUserAlreadyRegistered.Code
+		resp.Message = universalresp.RespCodeUserAlreadyRegistered.Message
+		return nil
+	}
+
+	password := utils.GenHashWithMD5(req.Password)
+
+	err := repository.InsertUser(req.Username, password)
+	if err != nil {
+		resp.Code = universalresp.RespCodeUserRegisterError.Code
+		resp.Message = universalresp.RespCodeUserRegisterError.Message
+		return err
+	}
+
+	resp.Code = universalresp.RespCodeSuccess.Code
+	resp.Message = universalresp.RespCodeSuccess.Message
+
 	return nil
 }
 

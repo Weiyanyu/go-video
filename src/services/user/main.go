@@ -20,7 +20,7 @@ func main() {
 
 	srv := micro.NewService(
 		micro.Registry(reg),
-		micro.Name("go.video.service.user"),
+		micro.Name(config.MicroServiceConf.ServiceName),
 	)
 
 	srv.Init()

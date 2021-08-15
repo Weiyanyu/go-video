@@ -2,7 +2,9 @@ package mysqldb
 
 import (
 	"fmt"
+	"go-video/src/common/log4video"
 	userconfig "go-video/src/services/user/config"
+	"net/url"
 
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
@@ -12,6 +14,7 @@ var mysqlDB *gorm.DB
 
 //GetConnection for Get Mysql connection object
 func GetConnection() *gorm.DB {
+	log4video.D("mysql addr(%p)", mysqlDB)
 	if mysqlDB != nil {
 		return mysqlDB
 	}
@@ -22,13 +25,20 @@ func GetConnection() *gorm.DB {
 		userconfig.MysqlConf.Host,
 		userconfig.MysqlConf.Port,
 		userconfig.MysqlConf.Database,
-		userconfig.MysqlConf.TimeLoc)
+		url.QueryEscape(userconfig.MysqlConf.TimeLoc))
 
-	mysqlDB, err := gorm.Open(mysql.Open(DSN), &gorm.Config{})
+	db, err := gorm.Open(mysql.Open(DSN), &gorm.Config{})
 	if err != nil {
 		//can recover by go-micro framework
 		panic(err)
 	}
+
+	mysqlDB = db
+
+	log4video.D("user service already connect to mysql server(%s:%s), conn(%p)",
+		userconfig.MysqlConf.Host,
+		userconfig.MysqlConf.Port,
+		mysqlDB)
 
 	return mysqlDB
 
