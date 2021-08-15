@@ -12,12 +12,12 @@ require (
 	github.com/go-git/go-git/v5 v5.4.2 // indirect
 	github.com/go-playground/validator/v10 v10.9.0 // indirect
 	github.com/gogo/protobuf v1.3.2 // indirect
-	github.com/golang/protobuf v1.5.2 // indirect
+	github.com/golang/protobuf v1.5.2
 	github.com/google/uuid v1.3.0 // indirect
 	github.com/json-iterator/go v1.1.11 // indirect
 	github.com/kevinburke/ssh_config v1.1.0 // indirect
 	github.com/mattn/go-isatty v0.0.13 // indirect
-	github.com/micro/go-micro/v2 v2.9.1 // indirect
+	github.com/micro/go-micro/v2 v2.9.1
 	github.com/miekg/dns v1.1.43 // indirect
 	github.com/mitchellh/hashstructure v1.1.0 // indirect
 	github.com/modern-go/concurrent v0.0.0-20180306012644-bacd9c7ef1dd // indirect
@@ -36,7 +36,7 @@ require (
 	golang.org/x/text v0.3.7 // indirect
 	google.golang.org/genproto v0.0.0-20210813162853-db860fec028c // indirect
 	google.golang.org/grpc v1.40.0 // indirect
-	google.golang.org/protobuf v1.27.1 // indirect
+	google.golang.org/protobuf v1.27.1
 	gopkg.in/yaml.v2 v2.4.0 // indirect
 	gorm.io/driver/mysql v1.1.2 // indirect
 	gorm.io/gorm v1.21.13 // indirect

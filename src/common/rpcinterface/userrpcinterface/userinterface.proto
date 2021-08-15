@@ -1,0 +1,74 @@
+syntax = "proto3";
+
+package userrpcinterface;
+option go_package="/userrpcinterface";
+
+//gen code command:
+//protoc --proto_path=src/common/rpcinterface/userrpcinterface --go_out=src/common/rpcinterface --micro_out=src/common/rpcinterface  src/common/rpcinterface/userrpcinterface/userinterface.proto
+
+service UserService {
+    rpc UserRegister(RegisterReq) returns (ReigisterResp);
+    rpc QueryUserInfo(QueryUserInfoReq) returns (QueryUserInfoResp);
+    rpc UpdateUserProfile(UpdateUserProfileReq) returns (UpdateUserProfileResp);
+    rpc ChangeUserPassword(ChangeUserPasswordReq) returns (ChangeUserPasswordResp);
+}
+
+//for user register
+message RegisterReq {
+    string username = 1;
+    string password = 2;
+}
+
+message ReigisterResp {
+    int64 code = 1;
+    string message = 2;
+}
+
+//for query user info
+message QueryUserInfoReq {
+    string ID = 1;
+}
+
+message QueryUserInfoResp {
+    int64 code = 1;
+    string message = 2;
+
+    message Data {
+        string username = 1;
+        string email = 2;
+        string phone = 3;
+        string profile = 4;
+        string lastActive = 5;
+        string signupAt = 6;
+        bool emailValidated = 7;
+        bool phoneValidated = 8;
+    }
+
+    Data data = 3;
+}
+
+//for update user profile
+message UpdateUserProfileReq {
+    string ID = 1;
+    string profile = 2;
+}
+
+message UpdateUserProfileResp {
+    int64 code = 1;
+    string message = 2;
+}
+
+//change user password
+message ChangeUserPasswordReq {
+    string ID = 1;
+    string account = 2;
+    string oldPassword = 3;
+    string newPassword = 4;
+}
+
+message ChangeUserPasswordResp {
+    int64 code = 1;
+    string message = 2;
+}
+
+
